@@ -60,7 +60,7 @@ button{font-family:inherit;cursor:pointer}
 }
 body.on-fire .logo .txt{color:#fff}
 .btn-pill{
-  display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.08em;
+  display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.08em;white-space:nowrap;
   padding:9px 20px;border:none;border-radius:999px;color:#fff;
   background:var(--orange);transition:filter .25s;
 }
@@ -263,26 +263,23 @@ h2.t{
 .philo-state .thin{opacity:.62}
 #spiralWrap{position:absolute;right:-6%;bottom:-16%;width:clamp(240px,36vw,460px);opacity:.5;pointer-events:none}
 #spiral path{stroke:#fff;stroke-width:1.6;fill:none}
-.jisho{
-  margin-top:clamp(28px,5vh,48px);max-width:430px;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);
-  padding:18px 22px;position:relative;
-}
-.jisho .yomi{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.26em;margin-bottom:6px;color:rgba(255,255,255,.85)}
-.jisho .imi{font-size:.85rem;line-height:1.9}
 .philo-mission{
   margin-top:clamp(22px,4vh,36px);
   font-family:var(--font-mono);font-size:.66rem;letter-spacing:.28em;color:rgba(255,255,255,.9);
 }
 
 /* ============ scene 03: problem ============ */
-.cards{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.cards{display:grid;gap:clamp(12px,1.8vw,20px)}
 @media (min-width:820px){.cards{grid-template-columns:repeat(3,1fr)}}
-.card{background:#fff;padding:clamp(20px,3vw,36px)}
+.card{
+  background:#fff;padding:clamp(20px,3vw,36px);
+  border-radius:18px;box-shadow:0 1px 2px rgba(42,34,26,.04),0 14px 34px rgba(42,34,26,.07);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
 .card .num{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.2em;color:var(--orange-deep);display:block;margin-bottom:14px}
 .card h3{font-size:1.04rem;font-weight:700;line-height:1.5;margin-bottom:10px;letter-spacing:.02em}
 .card p{font-size:.84rem;color:var(--muted)}
-.card:hover{background:var(--cream)}
+.card:hover{transform:translateY(-4px);box-shadow:0 2px 4px rgba(42,34,26,.05),0 22px 44px rgba(42,34,26,.1)}
 .pivot{
   margin-top:clamp(28px,5vh,48px);text-align:center;
   font-size:clamp(1.3rem,4.4vw,2.4rem);font-weight:800;line-height:1.5;letter-spacing:.02em;
@@ -292,7 +289,10 @@ h2.t{
 /* ============ scene 04: service ============ */
 .svc{display:grid;gap:clamp(14px,2vw,22px)}
 @media (min-width:880px){.svc{grid-template-columns:1fr 1fr}}
-.svc-card{background:#fff;border:1px solid var(--line-dark);padding:clamp(22px,3.4vw,40px)}
+.svc-card{
+  background:#fff;padding:clamp(22px,3.4vw,40px);
+  border-radius:18px;box-shadow:0 1px 2px rgba(42,34,26,.04),0 14px 34px rgba(42,34,26,.07);
+}
 .svc-card .num{font-family:var(--font-mono);color:var(--orange-deep);font-size:.68rem;letter-spacing:.24em;display:block;margin-bottom:16px}
 .svc-card h3{font-size:clamp(1.15rem,2.8vw,1.5rem);font-weight:800;line-height:1.4;margin-bottom:12px}
 .svc-card p{color:var(--muted-dark);font-size:.86rem;margin-bottom:18px}
@@ -301,9 +301,12 @@ h2.t{
   font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;color:var(--ink-dark);
   border:1px solid var(--line-dark);padding:5px 11px;border-radius:999px;background:var(--cream);
 }
-.how{margin-top:clamp(20px,3.5vh,36px);display:grid;gap:1px;background:var(--line-dark);border:1px solid var(--line-dark)}
+.how{margin-top:clamp(20px,3.5vh,36px);display:grid;gap:clamp(12px,1.8vw,20px)}
 @media (min-width:820px){.how{grid-template-columns:repeat(3,1fr)}}
-.how .step{background:#fff;padding:clamp(16px,2.4vw,26px)}
+.how .step{
+  background:#fff;padding:clamp(16px,2.4vw,26px);
+  border-radius:18px;box-shadow:0 1px 2px rgba(42,34,26,.04),0 14px 34px rgba(42,34,26,.07);
+}
 .how .step .k{font-size:clamp(1.15rem,2.8vw,1.6rem);font-weight:800;display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
 .how .step .k .idx{font-family:var(--font-mono);font-size:.62rem;color:var(--orange-deep);letter-spacing:.2em}
 .how .step p{font-size:.8rem;color:var(--muted-dark)}
@@ -329,7 +332,10 @@ h2.t{
 /* ============ scene 06: company ============ */
 .co-grid{display:grid;gap:clamp(16px,2.6vw,32px)}
 @media (min-width:960px){.co-grid{grid-template-columns:5fr 7fr;align-items:start}}
-.mission-card{background:#fff;border:1px solid var(--line-dark);padding:clamp(22px,3.2vw,36px)}
+.mission-card{
+  background:#fff;padding:clamp(22px,3.2vw,36px);
+  border-radius:18px;box-shadow:0 1px 2px rgba(42,34,26,.04),0 14px 34px rgba(42,34,26,.07);
+}
 .mission-card .label{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.3em;color:var(--orange-deep);margin-bottom:14px}
 .mission-card p.big{font-size:clamp(1.15rem,2.8vw,1.5rem);font-weight:800;line-height:1.7;margin-bottom:12px}
 .mission-card p.small{font-size:.82rem;color:var(--muted-dark)}
@@ -657,10 +663,6 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
           <span class="thin">もっと良いものへ、</span><br>
           昇華させる。
         </p>
-        <div class="jisho fx">
-          <p class="yomi">【昇華】 しょう‐か</p>
-          <p class="imi">物事が、より高い次元のものへ一段と高められること。——私たちの仕事は、御社の強みをこれで包み直すことです。</p>
-        </div>
         <p class="philo-mission fx">MISSION — 使える仕組みと、使える人を、同時に作る。</p>
       </div>
     </div>
@@ -946,11 +948,14 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
     if(e.deltaY > 0) next(); else prev();
   }, {passive:true});
 
-  var swX = null, swY = null;
+  var swX = null, swY = null, swTop = false, swBottom = false;
   window.addEventListener("pointerdown", function(e){
     if(e.pointerType !== "touch") return;
     if(e.target && e.target.id === "helix"){ swX = null; return; }
     swX = e.clientX; swY = e.clientY;
+    var sc = scenes[idx].querySelector(".scene-scroll");
+    swTop = !sc || sc.scrollTop <= 2;
+    swBottom = !sc || sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 2;
   }, {passive:true});
   window.addEventListener("pointerup", function(e){
     if(e.pointerType !== "touch" || swX === null || isMenuOpen()) return;
@@ -958,6 +963,11 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
     swX = null;
     if(Math.abs(dx) > 64 && Math.abs(dx) > Math.abs(dy) * 1.4){
       if(dx < 0) next(); else prev();
+      return;
+    }
+    if(Math.abs(dy) > 48 && Math.abs(dy) > Math.abs(dx) * 1.4){
+      if(dy < 0 && swBottom) next();
+      else if(dy > 0 && swTop) prev();
     }
   }, {passive:true});
 
