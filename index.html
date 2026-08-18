@@ -202,16 +202,13 @@ h2.t{
   opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s ease;
 }
 .proto-cta.on{opacity:1;pointer-events:auto;transform:translateX(-50%)}
-.btn-gate{
-  display:inline-flex;align-items:center;gap:14px;
-  font-size:clamp(.95rem,2.6vw,1.05rem);font-weight:700;letter-spacing:.1em;
-  padding:17px clamp(24px,4.5vw,38px);border-radius:999px;
-  background:var(--orange);color:#fff;border:none;
-  box-shadow:0 10px 34px rgba(255,74,0,.35);
-  transition:transform .3s,box-shadow .3s;white-space:nowrap;
+.gate-hint{
+  display:inline-flex;align-items:center;gap:12px;white-space:nowrap;
+  font-size:.88rem;font-weight:700;letter-spacing:.12em;color:var(--ink);
 }
-.btn-gate:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(255,74,0,.55)}
-.btn-gate .mono{font-family:var(--font-mono);font-weight:400;font-size:.6rem;letter-spacing:.24em;opacity:.85}
+.gate-hint .mono{font-family:var(--font-mono);font-weight:400;font-size:.6rem;letter-spacing:.24em;color:var(--muted)}
+.gate-hint .arr{color:var(--orange);animation:hintDown 1.4s ease infinite}
+@keyframes hintDown{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 .proto-hud{
   position:absolute;top:calc(64px + env(safe-area-inset-top));right:var(--pad);z-index:3;
   font-family:var(--font-mono);font-size:.6rem;letter-spacing:.22em;color:var(--muted);text-align:right;
@@ -613,9 +610,7 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
           <p class="rev">03 — AI → YOUR SYSTEM</p>
         </div>
         <div class="proto-cta" id="protoCta">
-          <button type="button" class="btn-gate" id="gateBtn">
-            <span>扉を開く</span><span class="mono">— ENTER SHIKUMI</span><span>→</span>
-          </button>
+          <p class="gate-hint"><span class="mono">ENTER SHIKUMI</span><span>そのまま下へ</span><span class="arr">↓</span></p>
         </div>
         <p class="proto-hud">REVOLUTION <b id="revNum">00</b> / 03</p>
       </div>
@@ -874,7 +869,6 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
   function next(){ goTo(idx + 1); }
   function prev(){ goTo(idx - 1); }
 
-  document.getElementById("gateBtn").addEventListener("click", function(){ goTo(1); });
   document.getElementById("homeLink").addEventListener("click", function(e){ e.preventDefault(); goTo(0, "fade"); });
   document.getElementById("contactLink").addEventListener("click", function(e){ e.preventDefault(); goTo(N - 1, "fade"); });
 
