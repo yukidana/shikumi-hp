@@ -388,71 +388,71 @@ h2.t{
   font-family:var(--font-mono);font-size:.66rem;letter-spacing:.3em;color:#fff;opacity:.9;
   display:flex;flex-direction:column;align-items:center;gap:16px;
 }
-#doors.closing .door{visibility:visible;animation:doorClose .55s cubic-bezier(.7,0,.3,1) forwards}
+#doors.closing .door{visibility:visible;animation:doorClose .4s cubic-bezier(.7,0,.3,1) forwards}
 #doors.opening .door{visibility:visible}
-#doors.opening .door.L{animation:doorOpenL .9s cubic-bezier(.6,0,.2,1) forwards}
-#doors.opening .door.R{animation:doorOpenR .9s cubic-bezier(.6,0,.2,1) forwards}
+#doors.opening .door.L{animation:doorOpenL .6s cubic-bezier(.6,0,.2,1) forwards}
+#doors.opening .door.R{animation:doorOpenR .6s cubic-bezier(.6,0,.2,1) forwards}
 @keyframes doorClose{to{transform:translateX(0)}}
 @keyframes doorOpenL{0%{transform:translateX(0) rotateY(0)}100%{transform:translateX(-6%) rotateY(-100deg);opacity:.9}}
 @keyframes doorOpenR{0%{transform:translateX(0) rotateY(0)}100%{transform:translateX(6%) rotateY(100deg);opacity:.9}}
 
 /* ============ transitions ============ */
-.t-push-out{animation:pushOut .85s cubic-bezier(.7,0,.2,1) forwards}
-.t-push-in{animation:pushIn .85s cubic-bezier(.7,0,.2,1) forwards;z-index:3}
+.t-push-out{animation:pushOut .55s cubic-bezier(.7,0,.2,1) forwards}
+.t-push-in{animation:pushIn .55s cubic-bezier(.7,0,.2,1) forwards;z-index:3}
 @keyframes pushOut{to{transform:translateX(-32%) scale(.96);filter:brightness(.92)}}
 @keyframes pushIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
-.t-push-out-rev{animation:pushOutR .85s cubic-bezier(.7,0,.2,1) forwards}
-.t-push-in-rev{animation:pushInR .85s cubic-bezier(.7,0,.2,1) forwards;z-index:3}
+.t-push-out-rev{animation:pushOutR .55s cubic-bezier(.7,0,.2,1) forwards}
+.t-push-in-rev{animation:pushInR .55s cubic-bezier(.7,0,.2,1) forwards;z-index:3}
 @keyframes pushOutR{to{transform:translateX(32%) scale(.96);filter:brightness(.92)}}
 @keyframes pushInR{from{transform:translateX(-100%)}to{transform:translateX(0)}}
 
-.t-shutter-out{animation:shutOut .8s cubic-bezier(.7,0,.2,1) forwards;z-index:3}
-.t-shutter-in{animation:shutIn .8s cubic-bezier(.55,.05,.3,1) forwards}
+.t-shutter-out{animation:shutOut .5s cubic-bezier(.7,0,.2,1) forwards;z-index:3}
+.t-shutter-in{animation:shutIn .5s cubic-bezier(.55,.05,.3,1) forwards}
 @keyframes shutOut{to{transform:translateY(-102%)}}
 @keyframes shutIn{from{transform:translateY(9%) scale(.985);opacity:.6}to{transform:none;opacity:1}}
-.t-shutter-out-rev{animation:shutOutR .8s cubic-bezier(.7,0,.2,1) forwards}
-.t-shutter-in-rev{animation:shutInR .8s cubic-bezier(.55,.05,.3,1) forwards;z-index:3}
+.t-shutter-out-rev{animation:shutOutR .5s cubic-bezier(.7,0,.2,1) forwards}
+.t-shutter-in-rev{animation:shutInR .5s cubic-bezier(.55,.05,.3,1) forwards;z-index:3}
 @keyframes shutOutR{to{transform:translateY(6%) scale(.985);opacity:.5}}
 @keyframes shutInR{from{transform:translateY(-102%)}to{transform:translateY(0)}}
 
-.t-warp-out{animation:warpOut .9s cubic-bezier(.7,0,.3,1) forwards;z-index:3}
-.t-warp-in{animation:warpIn .9s cubic-bezier(.3,.6,.2,1) forwards}
+.t-warp-out{animation:warpOut .55s cubic-bezier(.7,0,.3,1) forwards;z-index:3}
+.t-warp-in{animation:warpIn .55s cubic-bezier(.3,.6,.2,1) forwards}
 @keyframes warpOut{to{transform:scale(1.7);opacity:0;filter:blur(14px)}}
 @keyframes warpIn{from{transform:scale(.82);opacity:0;filter:blur(6px)}60%{opacity:1}to{transform:none;opacity:1;filter:blur(0)}}
-.t-warp-out-rev{animation:warpOutR .9s cubic-bezier(.7,0,.3,1) forwards}
-.t-warp-in-rev{animation:warpInR .9s cubic-bezier(.3,.6,.2,1) forwards;z-index:3}
+.t-warp-out-rev{animation:warpOutR .55s cubic-bezier(.7,0,.3,1) forwards}
+.t-warp-in-rev{animation:warpInR .55s cubic-bezier(.3,.6,.2,1) forwards;z-index:3}
 @keyframes warpOutR{to{transform:scale(.82);opacity:0;filter:blur(6px)}}
 @keyframes warpInR{from{transform:scale(1.7);opacity:0;filter:blur(14px)}60%{opacity:1}to{transform:none;opacity:1;filter:blur(0)}}
 
-.t-flip-out{animation:flipOut .9s cubic-bezier(.6,0,.3,1) forwards;transform-origin:20% center}
-.t-flip-in{animation:flipIn .9s cubic-bezier(.5,.05,.2,1) forwards;z-index:3;transform-origin:80% center}
+.t-flip-out{animation:flipOut .55s cubic-bezier(.6,0,.3,1) forwards;transform-origin:20% center}
+.t-flip-in{animation:flipIn .55s cubic-bezier(.5,.05,.2,1) forwards;z-index:3;transform-origin:80% center}
 @keyframes flipOut{to{transform:rotateY(-70deg) translateX(-24%);opacity:0}}
 @keyframes flipIn{from{transform:rotateY(55deg) translateX(24%);opacity:0}55%{opacity:1}to{transform:none;opacity:1}}
-.t-flip-out-rev{animation:flipOutR .9s cubic-bezier(.6,0,.3,1) forwards;transform-origin:80% center}
-.t-flip-in-rev{animation:flipInR .9s cubic-bezier(.5,.05,.2,1) forwards;z-index:3;transform-origin:20% center}
+.t-flip-out-rev{animation:flipOutR .55s cubic-bezier(.6,0,.3,1) forwards;transform-origin:80% center}
+.t-flip-in-rev{animation:flipInR .55s cubic-bezier(.5,.05,.2,1) forwards;z-index:3;transform-origin:20% center}
 @keyframes flipOutR{to{transform:rotateY(70deg) translateX(24%);opacity:0}}
 @keyframes flipInR{from{transform:rotateY(-55deg) translateX(-24%);opacity:0}55%{opacity:1}to{transform:none;opacity:1}}
 
-.t-lift-out{animation:liftOut .85s cubic-bezier(.65,0,.25,1) forwards}
-.t-lift-in{animation:liftIn .85s cubic-bezier(.65,0,.25,1) forwards;z-index:3}
+.t-lift-out{animation:liftOut .55s cubic-bezier(.65,0,.25,1) forwards}
+.t-lift-in{animation:liftIn .55s cubic-bezier(.65,0,.25,1) forwards;z-index:3}
 @keyframes liftOut{to{transform:translateY(-30%) scale(.97);filter:brightness(.92)}}
 @keyframes liftIn{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.t-lift-out-rev{animation:liftOutR .85s cubic-bezier(.65,0,.25,1) forwards}
-.t-lift-in-rev{animation:liftInR .85s cubic-bezier(.65,0,.25,1) forwards;z-index:3}
+.t-lift-out-rev{animation:liftOutR .55s cubic-bezier(.65,0,.25,1) forwards}
+.t-lift-in-rev{animation:liftInR .55s cubic-bezier(.65,0,.25,1) forwards;z-index:3}
 @keyframes liftOutR{to{transform:translateY(30%) scale(.97);filter:brightness(.92)}}
 @keyframes liftInR{from{transform:translateY(-100%)}to{transform:translateY(0)}}
 
-.t-iris-out{animation:irisDim .95s ease forwards}
-.t-iris-in{animation:irisIn .95s cubic-bezier(.6,0,.25,1) forwards;z-index:4}
+.t-iris-out{animation:irisDim .6s ease forwards}
+.t-iris-in{animation:irisIn .6s cubic-bezier(.6,0,.25,1) forwards;z-index:4}
 @keyframes irisDim{to{filter:brightness(.9)}}
 @keyframes irisIn{from{clip-path:circle(0% at 50% 62%)}to{clip-path:circle(142% at 50% 62%)}}
-.t-iris-out-rev{animation:irisOutRev .95s cubic-bezier(.6,0,.25,1) forwards;z-index:4}
-.t-iris-in-rev{animation:irisDimIn .95s ease forwards}
+.t-iris-out-rev{animation:irisOutRev .6s cubic-bezier(.6,0,.25,1) forwards;z-index:4}
+.t-iris-in-rev{animation:irisDimIn .6s ease forwards}
 @keyframes irisOutRev{from{clip-path:circle(142% at 50% 62%)}to{clip-path:circle(0% at 50% 62%)}}
 @keyframes irisDimIn{from{filter:brightness(.9)}to{filter:brightness(1)}}
 
-.t-fade-out{animation:fadeOut .5s ease forwards}
-.t-fade-in{animation:fadeIn .5s ease forwards;z-index:3}
+.t-fade-out{animation:fadeOut .35s ease forwards}
+.t-fade-in{animation:fadeIn .35s ease forwards;z-index:3}
 @keyframes fadeOut{to{opacity:0}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
@@ -581,9 +581,6 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
 
 <p class="place" aria-live="polite"><b id="placeNum">00</b><span id="placeLabel">HISTORY</span></p>
 <div class="dots" id="dots" role="tablist" aria-label="シーン切替"></div>
-<div class="ctrl">
-  <button type="button" id="skipBtn" aria-label="歴史をスキップして本編へ">スキップ ⏭</button>
-</div>
 
 <div id="stage">
 
@@ -799,9 +796,8 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
   var progress = document.getElementById("progress");
   var placeNum = document.getElementById("placeNum");
   var placeLabel = document.getElementById("placeLabel");
-  var skipBtn = document.getElementById("skipBtn");
   var doors = document.getElementById("doors");
-  var DUR = {push:900, shutter:850, warp:950, lift:900, iris:1000, flip:950, fade:550};
+  var DUR = {push:600, shutter:550, warp:600, lift:600, iris:650, flip:600, fade:400};
 
   var dots = document.getElementById("dots");
   scenes.forEach(function(s, i){
@@ -820,13 +816,12 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
     placeLabel.textContent = s.getAttribute("data-label");
     progress.style.width = (idx / (N - 1)) * 100 + "%";
     dotBtns.forEach(function(b, i){ b.classList.toggle("on", i === idx); });
-    skipBtn.style.display = idx === 0 ? "" : "none";
     scenes.forEach(function(sc, i){ sc.setAttribute("aria-hidden", i === idx ? "false" : "true"); });
   }
   function enterFx(scene){
     scene.classList.remove("entered");
     scene.querySelectorAll(".fx").forEach(function(el, i){
-      el.style.transitionDelay = (RM ? 0 : 90 + i * 90) + "ms";
+      el.style.transitionDelay = (RM ? 0 : 60 + i * 50) + "ms";
     });
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ scene.classList.add("entered"); }); });
   }
@@ -861,8 +856,8 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
           doors.classList.remove("opening");
           clearT(nxt);
           afterEnter(nxt); busy = false;
-        }, 950);
-      }, 600);
+        }, 650);
+      }, 450);
       return;
     }
     var suf = back ? "-rev" : "";
@@ -879,7 +874,6 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
   function next(){ goTo(idx + 1); }
   function prev(){ goTo(idx - 1); }
 
-  skipBtn.addEventListener("click", function(){ goTo(1, "fade"); });
   document.getElementById("gateBtn").addEventListener("click", function(){ goTo(1); });
   document.getElementById("homeLink").addEventListener("click", function(e){ e.preventDefault(); goTo(0, "fade"); });
   document.getElementById("contactLink").addEventListener("click", function(e){ e.preventDefault(); goTo(N - 1, "fade"); });
@@ -926,7 +920,7 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
   var wheelLock = 0;
   window.addEventListener("wheel", function(e){
     var now = Date.now();
-    if(busy || isMenuOpen() || now - wheelLock < 1100) return;
+    if(busy || isMenuOpen() || now - wheelLock < 700) return;
     if(Math.abs(e.deltaY) < 24) return;
     var sc = scenes[idx].querySelector(".scene-scroll");
     if(sc){
@@ -940,25 +934,33 @@ body.menu-open .m-list li:nth-child(7){transition-delay:.28s}
   }, {passive:true});
 
   var swX = null, swY = null, swTop = false, swBottom = false;
-  window.addEventListener("pointerdown", function(e){
-    if(e.pointerType !== "touch") return;
-    if(e.target && e.target.id === "helix"){ swX = null; return; }
-    swX = e.clientX; swY = e.clientY;
+  function sceneEdges(){
     var sc = scenes[idx].querySelector(".scene-scroll");
-    swTop = !sc || sc.scrollTop <= 2;
-    swBottom = !sc || sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 2;
+    return {
+      top: !sc || sc.scrollTop <= 2,
+      bottom: !sc || sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 2
+    };
+  }
+  window.addEventListener("touchstart", function(e){
+    if(e.target && e.target.id === "helix"){ swX = null; return; }
+    var t = e.touches[0];
+    swX = t.clientX; swY = t.clientY;
+    var ed = sceneEdges();
+    swTop = ed.top; swBottom = ed.bottom;
   }, {passive:true});
-  window.addEventListener("pointerup", function(e){
-    if(e.pointerType !== "touch" || swX === null || isMenuOpen()) return;
-    var dx = e.clientX - swX, dy = e.clientY - swY;
+  window.addEventListener("touchend", function(e){
+    if(swX === null || isMenuOpen()) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - swX, dy = t.clientY - swY;
     swX = null;
     if(Math.abs(dx) > 64 && Math.abs(dx) > Math.abs(dy) * 1.4){
       if(dx < 0) next(); else prev();
       return;
     }
-    if(Math.abs(dy) > 48 && Math.abs(dy) > Math.abs(dx) * 1.4){
-      if(dy < 0 && swBottom) next();
-      else if(dy > 0 && swTop) prev();
+    var ed = sceneEdges();
+    if(Math.abs(dy) > 40 && Math.abs(dy) > Math.abs(dx) * 1.2){
+      if(dy < 0 && (swBottom || ed.bottom)) next();
+      else if(dy > 0 && (swTop || ed.top)) prev();
     }
   }, {passive:true});
 
