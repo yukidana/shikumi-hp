@@ -4,11 +4,15 @@
 /area/tokyo/ 配下の区別ページ・東京都ハブページ・sitemap.xml を生成する。
 区を追加するときは WARDS に1エントリ足して再実行。
 """
-import os, datetime
+import os, datetime, json
 from urllib.parse import quote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://shikumi-co.jp"
+# 経済センサス(令和3年・第24表)と住民基本台帳(令和8年)の23区データ。tools/data/census_tokyo23.json
+_CENSUS = json.load(open(os.path.join(ROOT, "tools", "data", "census_tokyo23.json"), encoding="utf-8"))
+CENSUS, POP = _CENSUS["census"], _CENSUS["population"]
+FOCUS_INDUSTRIES = ["卸売業，小売業", "製造業", "建設業", "不動産業，物品賃貸業", "医療，福祉", "学術研究，専門・技術サービス業", "情報通信業", "運輸業，郵便業"]
 TODAY = datetime.date.today().isoformat()
 
 # ---------------------------------------------------------------- 区データ
@@ -375,6 +379,39 @@ def footer(ward=None):
 """
 
 
+def stats_section(w):
+    c = CENSUS.get(w["name"])
+    if not c:
+        return ""
+    total = c["全産業（S_公務を除く）"]
+    inds = {k: v for k, v in c.items() if not k.startswith("全産業") and not k.startswith("非農林漁業")}
+    top = sorted(inds.items(), key=lambda kv: -kv[1]["est"])[:3]
+    def pct(n): return f"{n / total['est'] * 100:.1f}"
+    top_txt = "・".join(f"{k}（{pct(v['est'])}%）" for k, v in top)
+    pop = POP.get(w["name"])
+    rows = "".join(
+        f"<tr><td>{esc(k)}</td><td style='text-align:right'>{inds[k]['est']:,}</td><td style='text-align:right'>{pct(inds[k]['est'])}%</td><td style='text-align:right'>{inds[k]['emp']:,}</td></tr>"
+        for k in FOCUS_INDUSTRIES if k in inds
+    )
+    return f"""
+<section>
+  <p class="eyebrow">DATA</p>
+  <h2>{w['name']}の事業所データ</h2>
+  <p>{w['name']}には民営事業所が<b>{total['est']:,}か所</b>、従業者が<b>{total['emp']:,}人</b>あります（令和3年経済センサス‐活動調査）。事業所数の構成は{top_txt}が上位。書類・転記・例外処理の多い業種の比重が高いエリアほど、AI化で削減できる工数は大きくなります。</p>
+  <div class="three">
+    <div class="card"><p class="k-label">POPULATION</p><p class="s-price">{pop:,}<span style="font-size:14px">人</span></p><p class="s-meta">人口（住民基本台帳・令和8年）</p></div>
+    <div class="card"><p class="k-label">ESTABLISHMENTS</p><p class="s-price">{total['est']:,}<span style="font-size:14px">か所</span></p><p class="s-meta">民営事業所数（公務を除く）</p></div>
+    <div class="card"><p class="k-label">EMPLOYEES</p><p class="s-price">{total['emp']:,}<span style="font-size:14px">人</span></p><p class="s-meta">従業者数（民営）</p></div>
+  </div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>産業大分類</th><th style="text-align:right">事業所数</th><th style="text-align:right">構成比</th><th style="text-align:right">従業者数</th></tr></thead>
+    <tbody>{rows}</tbody>
+  </table></div>
+  <p class="s-meta">出典: 総務省・経済産業省「<a href="https://www.e-stat.go.jp/stat-search/files?toukei=00200553&amp;tstat=000001145590" rel="noopener" target="_blank">令和3年経済センサス‐活動調査</a>」第24表（産業大分類・経営組織別 民営事業所数及び従業者数）、東京都「<a href="https://www.toukei.metro.tokyo.lg.jp/juukiy/jy-index.htm" rel="noopener" target="_blank">住民基本台帳による東京都の世帯と人口</a>」令和8年。当社が主に支援する業種を抜粋。</p>
+</section>
+"""
+
+
 def section_common(ward_name):
     checks = "".join(f"<li>{esc(c)}</li>" for c in FIT_CHECKS)
     kata = "".join(
@@ -465,7 +502,7 @@ def build_ward(slug, w):
   <p>{esc(w['industry'])}</p>
   <div class="three">{points}</div>
 </section>
-
+{stats_section(w)}
 <section>
   <p class="eyebrow">AREA</p>
   <h2>{w['name']}の主な対応エリア</h2>
@@ -522,6 +559,7 @@ def build_hub():
   <p class="lead">株式会社シクミは、渋谷区桜丘町のオフィスを拠点に、東京都内の中小企業の現場へ直接伺うAI導入支援を行っています。AI人材が現場に駐在し、業務のヒアリングから実装・内製化までを一気通貫で実行。ツールを売って終わりにせず、貴社が自分たちで回せる「仕組み」を残します。</p>
   <a class="btn-main" href="{mailto('無料簡易診断の申込（東京都）')}">無料簡易診断を申し込む →</a>
   <p class="hero-meta">オンライン約2時間・0円／東京都内全域対応（下記以外のエリアもご相談ください）</p>
+  <p class="hero-meta">東京都の民営事業所は{CENSUS['東京都']['全産業（S_公務を除く）']['est']:,}か所・従業者{CENSUS['東京都']['全産業（S_公務を除く）']['emp']:,}人（令和3年経済センサス‐活動調査）。各区ページに区別の事業所データを掲載しています。</p>
 </div>
 
 <section>
