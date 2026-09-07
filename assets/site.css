@@ -144,3 +144,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
 .pill-row span{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;font-size:12.5px;color:var(--muted)}
 .rel-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
 @media (max-width:820px){.rel-cards{grid-template-columns:1fr}}
+
+/* 対応エリア 町名リスト */
+.area-list{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 10px;padding:0}
+.area-list li{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px;font-size:12.5px;color:#4a4036}
