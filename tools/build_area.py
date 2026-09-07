@@ -12,6 +12,7 @@ BASE = "https://shikumi-co.jp"
 # 経済センサス(令和3年・第24表)と住民基本台帳(令和8年)の23区データ。tools/data/census_tokyo23.json
 _CENSUS = json.load(open(os.path.join(ROOT, "tools", "data", "census_tokyo23.json"), encoding="utf-8"))
 CENSUS, POP = _CENSUS["census"], _CENSUS["population"]
+INDUSTRY_LINKS = {"不動産業，物品賃貸業": "real-estate", "製造業": "manufacturing", "建設業": "construction", "卸売業，小売業": "wholesale", "運輸業，郵便業": "logistics", "医療，福祉": "healthcare", "学術研究，専門・技術サービス業": "professional"}
 FOCUS_INDUSTRIES = ["卸売業，小売業", "製造業", "建設業", "不動産業，物品賃貸業", "医療，福祉", "学術研究，専門・技術サービス業", "情報通信業", "運輸業，郵便業"]
 TODAY = datetime.date.today().isoformat()
 
@@ -233,6 +234,15 @@ CSS_PATH = "/assets/site.css"
 
 # sitemap に含める固定ページ（エリア以外）。ページ追加時はここに足す
 EXTRA_URLS = [
+    "/industry/",
+    "/industry/real-estate/",
+    "/industry/manufacturing/",
+    "/industry/construction/",
+    "/industry/wholesale/",
+    "/industry/logistics/",
+    "/industry/healthcare/",
+    "/industry/professional/",
+    "/industry/retail-service/",
     "/service/consulting/",
     "/service/training/",
     "/subsidy/",
@@ -354,7 +364,7 @@ def head(title, desc, canonical, ld):
 <body>
 <header class="site-head">
   <a class="brand" href="/"><span class="mark">仕</span>SHIKUMI</a>
-  <nav><a href="/service/consulting/">AI導入支援</a><a href="/service/training/">AI研修</a><a href="/subsidy/">助成金</a><a href="/column/">コラム</a><a href="/area/tokyo/">対応エリア</a><a class="cta-s" href="{mailto('無料簡易診断の申込')}">相談する</a></nav>
+  <nav><a href="/service/consulting/">AI導入支援</a><a href="/service/training/">AI研修</a><a href="/industry/">業種別</a><a href="/subsidy/">助成金</a><a href="/column/">コラム</a><a href="/area/tokyo/">対応エリア</a><a class="cta-s" href="{mailto('無料簡易診断の申込')}">相談する</a></nav>
 </header>
 """
 
@@ -366,7 +376,7 @@ def footer(ward=None):
         links = f'<div class="f-links"><span>近隣エリア:</span>{nb}<a href="/area/tokyo/">東京都エリア一覧</a></div>'
     return f"""<footer class="site-foot">
   {links}
-  <div class="f-links"><span>サービス:</span><a href="/service/consulting/">生成AI導入支援（駐在型AIコンサル）</a><a href="/service/training/">AI研修</a><a href="/subsidy/">助成金のご案内</a><a href="/column/">コラム</a></div>
+  <div class="f-links"><span>サービス:</span><a href="/service/consulting/">生成AI導入支援（駐在型AIコンサル）</a><a href="/service/training/">AI研修</a><a href="/industry/">業種別AI導入支援</a><a href="/subsidy/">助成金のご案内</a><a href="/column/">コラム</a></div>
   <div class="f-co">
     <p class="f-name">株式会社シクミ（shikumi inc.）</p>
     <p>東京都渋谷区桜丘町18-4 二宮ビル1F ／ <a href="mailto:info@shikumi-co.jp">info@shikumi-co.jp</a></p>
@@ -389,8 +399,12 @@ def stats_section(w):
     def pct(n): return f"{n / total['est'] * 100:.1f}"
     top_txt = "・".join(f"{k}（{pct(v['est'])}%）" for k, v in top)
     pop = POP.get(w["name"])
+    def ind_label(k):
+        if k in INDUSTRY_LINKS:
+            return '<a href="/industry/%s/">%s</a>' % (INDUSTRY_LINKS[k], esc(k))
+        return esc(k)
     rows = "".join(
-        f"<tr><td>{esc(k)}</td><td style='text-align:right'>{inds[k]['est']:,}</td><td style='text-align:right'>{pct(inds[k]['est'])}%</td><td style='text-align:right'>{inds[k]['emp']:,}</td></tr>"
+        f"<tr><td>{ind_label(k)}</td><td style='text-align:right'>{inds[k]['est']:,}</td><td style='text-align:right'>{pct(inds[k]['est'])}%</td><td style='text-align:right'>{inds[k]['emp']:,}</td></tr>"
         for k in FOCUS_INDUSTRIES if k in inds
     )
     return f"""
