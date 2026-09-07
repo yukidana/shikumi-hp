@@ -6,7 +6,7 @@
 業種追加時は INDUSTRIES にエントリを足し、build_area.py の EXTRA_URLS にパスを追加。
 """
 import os, json
-from build_area import head, footer, mailto, esc, BASE, ROOT, CASES, CENSUS, WARDS
+from build_area import head, footer, mailto, esc, BASE, ROOT, CASES, CENSUS, WARDS, trust_strip, cta_dual, cta_mid, founder_note, sticky_cta, final_cta
 
 TODAY = "2026-09-08"
 
@@ -53,7 +53,7 @@ INDUSTRIES = {
             ("受発注・納期管理の自動化", "注文をAIが台帳へ自動登録し、納期一覧を自動更新。確認電話と抜け漏れを減らします。"),
         ],
         "case_idx": [],
-        "plan": ("製造業の見積業務（ご提案例）", "取扱商品4万点との照合が人力で属人化。メール・FAXをAIが読み取り、商品マスタと顧客別掛率に自動照合、見積書ドラフトまで自動生成する構成をご提案。既存のGoogle Workspace上に構築するため内製化しやすい設計。", "見積作業時間 50〜60%削減目標（月1,500時間規模）／想定契約金額300万円 ※実施前のご提案例・数値は目標値"),
+        "plan": ("製造業の見積業務（ご提案例）", "取扱商品4万点との照合が人力で属人化。メール・FAXをAIが読み取り、商品マスタと顧客別掛率に自動照合、見積書ドラフトまで自動生成する構成をご提案。既存のGoogle Workspace上に構築するため内製化しやすい設計。", "見積作業時間 50〜60%削減目標（月1,500時間規模） ※実施前のご提案例・数値は目標値"),
         "faqs": [
             ("図面や専門用語が多くてもAIは読めますか？", "見積照合に必要な情報（品番・数量・材質・寸法など）の抽出は実用レベルです。図面そのものの判断はエンジニアに残し、AIは照合・下書き・転記を担う分担にします。"),
             ("生産管理システムとの連携は必要ですか？", "必須ではありません。まずCSV取込用データをAIが生成する形で始め、効果が出た工程から連携を検討するのが失敗しない順序です。"),
@@ -191,19 +191,11 @@ def faq_html(faqs):
 
 
 def cta(name):
-    return f"""
-<section class="cta-box">
-  <p class="eyebrow">CONTACT</p>
-  <h2>まずは、無料の簡易診断から</h2>
-  <p>オンライン・約2時間で、{esc(name)}の貴社の業務にAIがどこまで効くか、期待効果の目安をご提示します。診断だけのご利用も歓迎です。</p>
-  <a class="btn-main" href="{mailto('無料簡易診断の申込（' + name + '）')}">無料簡易診断を申し込む →</a>
-  <p class="cta-mail">メール: info@shikumi-co.jp（1営業日以内にご返信します）</p>
-</section>
-"""
+    return final_cta(name, f"オンライン・約2時間で、{name}の貴社の業務にAIがどこまで効くか、期待効果の目安をご提示します。診断だけのご利用も歓迎です。")
 
 
 COMMON_FAQS = [
-    ("費用はどのくらいかかりますか？", "無料簡易診断（0円）→実地調査50〜150万円→駐在型支援は月60時間で参考100万円/月（3〜6ヶ月）→AI研修30万円/名です。各ステップの節目で「次に進むか」をご判断いただけます。納品後のサブスクリプション費用はありません。"),
+    ("費用はどのくらいかかりますか？", "まず無料簡易診断（オンライン・約2時間）で削減効果の目安をご確認いただき、その結果に基づいて稼働時間と体制を設計し、個別にお見積りします。各ステップの節目で「次に進むか」をご判断いただけ、納品後のサブスクリプション費用はありません。"),
     ("対応エリアは？", "全国対応です（遠方は交通費実費）。東京都内は渋谷オフィスから直接伺います。"),
 ]
 
@@ -258,8 +250,9 @@ def build_industry(slug, d):
   <p class="eyebrow">AI FOR {esc(d['en'])}</p>
   <h1>{esc(d['name'])}の<br class="sp">AI導入支援・業務自動化</h1>
   <p class="lead">{esc(d['lead'])}</p>
-  <a class="btn-main" href="{mailto('無料簡易診断の申込（' + d['name'] + '）')}">無料簡易診断を申し込む →</a>
-  <p class="hero-meta">オンライン約2時間・0円／駐在型（現場で実装）／納品後のサブスクなし</p>
+  {trust_strip()}
+  {cta_dual(d['name'])}
+  <p class="hero-meta">駐在型（現場で実装）／納品後のサブスクなし</p>
 </div>
 
 <section>
@@ -274,6 +267,7 @@ def build_industry(slug, d):
   <div class="three">{points}</div>
 </section>
 
+{cta_mid(d['name'])}
 <section>
   <p class="eyebrow">CASE</p>
   <h2>{case_title}</h2>
@@ -282,18 +276,19 @@ def build_industry(slug, d):
 
 <section>
   <p class="eyebrow">FLOW / PRICE</p>
-  <h2>進め方と料金</h2>
+  <h2>進め方——各ステップの節目で判断できます</h2>
   <div class="tbl-wrap"><table class="tbl">
-    <thead><tr><th>ステップ</th><th>内容</th><th>期間</th><th>料金</th></tr></thead>
+    <thead><tr><th>ステップ</th><th>内容</th><th>期間</th><th>費用</th></tr></thead>
     <tbody>
-      <tr><td><b>STEP 0</b></td><td>無料簡易診断（業務概要のヒアリングと期待効果の提示）</td><td>オンライン約2時間</td><td><b>0円</b></td></tr>
-      <tr><td><b>STEP 1</b></td><td>実地調査・AI化ロードマップと削減効果の試算</td><td>約1〜3ヶ月</td><td>50〜150万円</td></tr>
-      <tr class="hl"><td><b>STEP 2</b></td><td>駐在型AI化支援（現場で実装・現地＋リモート）</td><td>月60時間・3〜6ヶ月</td><td>参考100万円/月</td></tr>
-      <tr><td><b>STEP 3</b></td><td>AI研修（構築済みの自社業務フローが教材）</td><td>4回×2.5時間</td><td>30万円/名（<a href="/subsidy/">助成金</a>で実質1/4以下も）</td></tr>
+      <tr><td><b>STEP 0</b></td><td>無料簡易診断（業務概要のヒアリングと期待効果の提示）</td><td>オンライン約2時間</td><td><b>無料</b></td></tr>
+      <tr><td><b>STEP 1</b></td><td>実地調査・AI化ロードマップと削減効果の試算</td><td>約1〜3ヶ月</td><td>個別お見積り</td></tr>
+      <tr class="hl"><td><b>STEP 2</b></td><td>駐在型AI化支援（現場で実装・現地＋リモート）</td><td>月60時間・3〜6ヶ月</td><td>個別お見積り</td></tr>
+      <tr><td><b>STEP 3</b></td><td>AI研修（構築済みの自社業務フローが教材）</td><td>4回×2.5時間</td><td>個別お見積り（<a href="/subsidy/">助成金</a>で実質約1/4に）</td></tr>
     </tbody>
   </table></div>
-  <p>詳しくは<a href="/service/consulting/">生成AI導入支援（駐在型AIコンサルティング）</a>のページへ。</p>
+  <p class="s-meta">料金は無料診断・実地調査の結果に基づき、稼働時間・体制を設計して個別にお見積りします。詳しくは<a href="/service/consulting/">生成AI導入支援（駐在型AIコンサルティング）</a>のページへ。</p>
 </section>
+{founder_note()}
 {ward_html}
 <section>
   <p class="eyebrow">FAQ</p>
@@ -306,7 +301,7 @@ def build_industry(slug, d):
     outdir = os.path.join(ROOT, "industry", slug)
     os.makedirs(outdir, exist_ok=True)
     with open(os.path.join(outdir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(head(title, d["desc"], url, ld) + body + footer())
+        f.write(head(title, d["desc"], url, ld) + body + sticky_cta(d["name"]) + footer())
 
 
 def build_hub():
@@ -325,7 +320,8 @@ def build_hub():
   <p class="eyebrow">INDUSTRIES</p>
   <h1>業種別の<br class="sp">AI導入支援・業務自動化</h1>
   <p class="lead">業種が違えば、時間が消えている場所も違います。ただし共通点があります——<b>書類・転記・例外処理の多い業務は、業種を問わず同じ「仕組みの型」でAI化できる</b>ということ。当社が主に支援する8業種について、現場で見えてきた構造とAIが効くポイントをまとめました。掲載のない業種もご相談ください。</p>
-  <a class="btn-main" href="{mailto('無料簡易診断の申込（業種別）')}">無料簡易診断を申し込む →</a>
+  {trust_strip()}
+  {cta_dual('業種別')}
 </div>
 <section>
   <div class="three" style="grid-template-columns:repeat(2,1fr)">{cards}</div>
@@ -344,7 +340,7 @@ def build_hub():
     outdir = os.path.join(ROOT, "industry")
     os.makedirs(outdir, exist_ok=True)
     with open(os.path.join(outdir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(head(title, desc, url, ld) + body + footer())
+        f.write(head(title, desc, url, ld) + body + sticky_cta("業種別") + footer())
 
 
 if __name__ == "__main__":
