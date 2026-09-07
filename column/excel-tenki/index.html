@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Excel転記を自動化する3つの方法——手作業の転記をなくす実務ガイド｜株式会社シクミ</title>
+<meta name="description" content="Excelへの転記作業は「関数・Power Query」「RPA」「AI-OCR×生成AI」の3つで自動化できます。それぞれの向き不向きの比較、選び方の判断フロー、そして転記そのものを消す業務再設計まで。月40時間の転記工数を削減した実例も紹介。">
+<link rel="canonical" href="https://shikumi-co.jp/column/excel-tenki/">
+<meta property="og:title" content="Excel転記を自動化する3つの方法——手作業の転記をなくす実務ガイド｜株式会社シクミ">
+<meta property="og:description" content="Excelへの転記作業は「関数・Power Query」「RPA」「AI-OCR×生成AI」の3つで自動化できます。それぞれの向き不向きの比較、選び方の判断フロー、そして転記そのものを消す業務再設計まで。月40時間の転記工数を削減した実例も紹介。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shikumi-co.jp/column/excel-tenki/">
+<meta property="og:image" content="https://shikumi-co.jp/apple-touch-icon.png">
+<meta property="og:site_name" content="株式会社シクミ">
+<link rel="icon" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Excel転記を自動化する3つの方法——手作業の転記をなくす実務ガイド｜株式会社シクミ", "description": "Excelへの転記作業は「関数・Power Query」「RPA」「AI-OCR×生成AI」の3つで自動化できます。それぞれの向き不向きの比較、選び方の判断フロー、そして転記そのものを消す業務再設計まで。月40時間の転記工数を削減した実例も紹介。", "datePublished": "2026-09-06", "dateModified": "2026-09-06", "author": {"@type": "Organization", "name": "株式会社シクミ", "url": "https://shikumi-co.jp/"}, "publisher": {"@type": "Organization", "name": "株式会社シクミ"}, "mainEntityOfPage": "https://shikumi-co.jp/column/excel-tenki/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "株式会社シクミ", "item": "https://shikumi-co.jp/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://shikumi-co.jp/column/"}, {"@type": "ListItem", "position": 3, "name": "Excel転記を自動化する3つの方法——手作業の転記をなくす実務ガイド｜株式会社シクミ", "item": "https://shikumi-co.jp/column/excel-tenki/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Excel転記の自動化にはどんな方法がありますか？", "acceptedAnswer": {"@type": "Answer", "text": "①Excel内・Excel間の転記なら関数やPower Query、②システム画面からExcelへの転記ならRPA、③紙・PDF・メールからExcelへの転記ならAI-OCRと生成AIの組み合わせ、が基本の3択です。転記元が何かで選びます。"}}, {"@type": "Question", "name": "プログラミングができなくても自動化できますか？", "acceptedAnswer": {"@type": "Answer", "text": "できます。Power Queryはマウス操作中心で構築でき、生成AIを使った整形は日本語の指示で作れます。ただし「壊れたときに直せる人」を社内に用意するか、内製化支援まで行う外部パートナーと組むのが長続きのコツです。"}}, {"@type": "Question", "name": "AI-OCRの精度はどのくらいですか？", "acceptedAnswer": {"@type": "Answer", "text": "活字の帳票なら実用レベルに達しています。手書きや低品質なFAXは誤読が残るため、読み取り結果を人が確認する画面（チェック工程）を挟む設計が実務では標準です。それでも入力そのものより大幅に速くなります。"}}, {"@type": "Question", "name": "転記ミスをなくすにはどうすればいいですか？", "acceptedAnswer": {"@type": "Answer", "text": "最も効果的なのは転記の回数自体を減らすことです。同じ情報を2回入力している箇所を洗い出し、入口で一度だけデータ化して各システムへ流す形に再設計すると、ミスは構造的に発生しなくなります。"}}]}]}</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/"><span class="mark">仕</span>SHIKUMI</a>
+  <nav><a href="/service/consulting/">AI導入支援</a><a href="/service/training/">AI研修</a><a href="/subsidy/">助成金</a><a href="/column/">コラム</a><a href="/area/tokyo/">対応エリア</a><a class="cta-s" href="mailto:info@shikumi-co.jp?subject=%E7%84%A1%E6%96%99%E7%B0%A1%E6%98%93%E8%A8%BA%E6%96%AD%E3%81%AE%E7%94%B3%E8%BE%BC">相談する</a></nav>
+</header>
+<main class="article">
+<nav class="crumbs" aria-label="パンくず"><a href="/">トップ</a> › <a href="/column/">コラム</a> › <span>Excel転記を自動化する3つの方法——手作業の転記をなくす実務ガイド</span></nav>
+<div class="hero">
+  <p class="eyebrow">COLUMN</p>
+  <h1>Excel転記を自動化する3つの方法<br class="sp">——手作業の転記をなくす実務ガイド</h1>
+  <p class="meta-line">更新日 2026-09-06 ／ 執筆: 株式会社シクミ（駐在型AIコンサルティング）</p>
+  <p class="lead">システムからExcelへ、ExcelからExcelへ、紙からExcelへ——転記は中小企業の現場で最も多く見つかる「工数泥棒」です。この記事では転記元別の自動化手段3つと選び方、そして転記そのものを業務から消す再設計を、実例つきで解説します。</p>
+</div>
+
+<div class="conclusion">
+  <p class="c-label">CONCLUSION</p>
+  <p><b>結論:</b> Excel転記の自動化は転記元で選びます。<b>Excel→Excelは「関数・Power Query」、システム画面→Excelは「RPA」、紙・PDF・メール→Excelは「AI-OCR×生成AI」</b>。そして最大の成果は、転記を速くすることではなく<b>転記そのものを業務から消す再設計</b>から生まれます。</p>
+</div>
+
+<section>
+  <h2>なぜ転記作業はなくならないのか</h2>
+  <p>転記は「システムとシステムの分断」から生まれます。FAXで届いた注文をExcelの管理表へ、Excelの管理表から基幹システムへ、基幹システムから報告用Excelへ——<b>同じ情報が形を変えて何度も入力されている</b>のが典型パターンです。1回5分でも、月に数百回あれば数十時間。当社が現場で業務を棚卸しすると、転記は最も頻出する「工数泥棒」です。</p>
+</section>
+
+<section>
+  <h2>自動化の3つの方法</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th></th><th>① 関数・Power Query</th><th>② RPA</th><th>③ AI-OCR × 生成AI</th></tr></thead>
+    <tbody>
+      <tr><td><b>向いている転記元</b></td><td>別のExcel・CSV</td><td>システムの画面</td><td>紙・PDF・FAX・メール本文</td></tr>
+      <tr><td><b>費用感</b></td><td>0円（Excel標準機能）</td><td>月数万〜数十万円</td><td>AI利用料（月数千円〜）</td></tr>
+      <tr><td><b>構築難易度</b></td><td>低〜中</td><td>中</td><td>中（生成AIへの指示設計）</td></tr>
+      <tr><td><b>保守性</b></td><td>高い</td><td>画面変更に弱い</td><td>フォーマット変化に比較的強い</td></tr>
+      <tr><td><b>まず試すべき人</b></td><td>Excel間の集計・統合がある</td><td>基幹システムへの定型入力がある</td><td>紙・PDFの入力作業がある</td></tr>
+    </tbody>
+  </table></div>
+  <h3>判断フロー</h3>
+  <ol>
+    <li>転記元がExcel/CSV → <b>Power Query</b>で取得・整形を自動化（追加費用ゼロ）</li>
+    <li>転記元がシステム画面 → まず<b>CSVエクスポート機能やAPI</b>を探す。なければRPA</li>
+    <li>転記元が紙・PDF・メール → <b>AI-OCR＋生成AI</b>で読み取り、基幹システム取込用の形式に自動変換</li>
+  </ol>
+</section>
+
+<section>
+  <h2>実例: 転記工数を月40時間削減した不動産管理会社</h2>
+  <p>当社が支援した東京都の不動産管理会社では、物件書類の検索・転記が手作業で、表記揺れによる重複登録が運用工数を約1.2倍に膨らませていました。書類の自動リネーム・名寄せ・1物件1ページ帳票の自動生成・基幹システム入力データの自動生成を構築した結果、<b>書類検索・転記の工数を月40時間削減</b>。さらに「転記先」だった月額基幹システム自体が不要と判明し、解約で固定費も削減しました（契約金額150万円・約2ヶ月）。</p>
+  <p>この事例が示す通り、転記の自動化を進めると<b>「そもそもこの転記先は必要か？」</b>という問いに行き着きます。ここまで踏み込むのが業務再設計です。</p>
+</section>
+
+<section>
+  <h2>長続きさせる3つのコツ</h2>
+  <ul>
+    <li><b>入口で一度だけデータ化する</b>——紙・FAX・メールで届いた情報は、届いた瞬間に構造化し、以降は流用する</li>
+    <li><b>チェック工程を残す</b>——AI読み取りは「人が確認して確定」を挟むと、精度不安なく運用に乗ります</li>
+    <li><b>直せる人を社内に作る</b>——仕組みは必ずメンテナンスが発生します。作って終わりの外注ではなく、内製化までを設計してください</li>
+  </ul>
+</section>
+
+<section>
+  <h2>よくある質問</h2>
+  <div class="faqs"><details><summary>Excel転記の自動化にはどんな方法がありますか？</summary><p>①Excel内・Excel間の転記なら関数やPower Query、②システム画面からExcelへの転記ならRPA、③紙・PDF・メールからExcelへの転記ならAI-OCRと生成AIの組み合わせ、が基本の3択です。転記元が何かで選びます。</p></details><details><summary>プログラミングができなくても自動化できますか？</summary><p>できます。Power Queryはマウス操作中心で構築でき、生成AIを使った整形は日本語の指示で作れます。ただし「壊れたときに直せる人」を社内に用意するか、内製化支援まで行う外部パートナーと組むのが長続きのコツです。</p></details><details><summary>AI-OCRの精度はどのくらいですか？</summary><p>活字の帳票なら実用レベルに達しています。手書きや低品質なFAXは誤読が残るため、読み取り結果を人が確認する画面（チェック工程）を挟む設計が実務では標準です。それでも入力そのものより大幅に速くなります。</p></details><details><summary>転記ミスをなくすにはどうすればいいですか？</summary><p>最も効果的なのは転記の回数自体を減らすことです。同じ情報を2回入力している箇所を洗い出し、入口で一度だけデータ化して各システムへ流す形に再設計すると、ミスは構造的に発生しなくなります。</p></details></div>
+</section>
+
+<section>
+  <p class="eyebrow">RELATED</p>
+  <h2>あわせて読む</h2>
+  <div class="rel-cards"><a class="card ward-card" href="/column/browser-automation/"><h3>ブラウザ操作を自動化する3つの方法</h3><p>転記の相棒、画面操作の自動化。RPAとAIエージェントの使い分け。</p><span class="more">読む →</span></a><a class="card ward-card" href="/service/consulting/"><h3>生成AI導入支援（駐在型AIコンサル）</h3><p>転記を消す業務再設計を、現場に入って実装します。</p><span class="more">読む →</span></a></div>
+</section>
+
+<section class="cta-box">
+  <p class="eyebrow">CONTACT</p>
+  <h2>まずは、無料の簡易診断から</h2>
+  <p>オンライン・約2時間の無料簡易診断で、貴社のAI化の期待効果の目安をご提示します。診断だけのご利用も歓迎です。</p>
+  <a class="btn-main" href="mailto:info@shikumi-co.jp?subject=%E7%84%A1%E6%96%99%E7%B0%A1%E6%98%93%E8%A8%BA%E6%96%AD%E3%81%AE%E7%94%B3%E8%BE%BC%EF%BC%88Excel%E8%BB%A2%E8%A8%98%E8%A8%98%E4%BA%8B%EF%BC%89">無料簡易診断を申し込む →</a>
+  <p class="cta-mail">メール: info@shikumi-co.jp（1営業日以内にご返信します）</p>
+</section>
+
+</main>
+<footer class="site-foot">
+  
+  <div class="f-links"><span>サービス:</span><a href="/service/consulting/">生成AI導入支援（駐在型AIコンサル）</a><a href="/service/training/">AI研修</a><a href="/subsidy/">助成金のご案内</a><a href="/column/">コラム</a></div>
+  <div class="f-co">
+    <p class="f-name">株式会社シクミ（shikumi inc.）</p>
+    <p>東京都渋谷区桜丘町18-4 二宮ビル1F ／ <a href="mailto:info@shikumi-co.jp">info@shikumi-co.jp</a></p>
+    <p>事業内容: AI導入支援（駐在型AIコンサルティング／AI研修）・ITコンサルティング・システム開発</p>
+    <p class="f-copy">© 2026 SHIKUMI INC. ／ <a href="/">トップへ戻る</a></p>
+  </div>
+</footer>
+</body>
+</html>

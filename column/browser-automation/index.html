@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ブラウザ操作を自動化する3つの方法——マクロ・RPA・AIエージェントの使い分け｜株式会社シクミ</title>
+<meta name="description" content="ブラウザ操作の自動化は「マクロ・拡張機能」「RPA」「AIエージェント」の3つから選ぶ時代に。それぞれの得意・不得意の比較表、向いている業務、画面変更に強いAIエージェントの新しい選択肢、導入時の注意点を実務目線で解説します。">
+<link rel="canonical" href="https://shikumi-co.jp/column/browser-automation/">
+<meta property="og:title" content="ブラウザ操作を自動化する3つの方法——マクロ・RPA・AIエージェントの使い分け｜株式会社シクミ">
+<meta property="og:description" content="ブラウザ操作の自動化は「マクロ・拡張機能」「RPA」「AIエージェント」の3つから選ぶ時代に。それぞれの得意・不得意の比較表、向いている業務、画面変更に強いAIエージェントの新しい選択肢、導入時の注意点を実務目線で解説します。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shikumi-co.jp/column/browser-automation/">
+<meta property="og:image" content="https://shikumi-co.jp/apple-touch-icon.png">
+<meta property="og:site_name" content="株式会社シクミ">
+<link rel="icon" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "ブラウザ操作を自動化する3つの方法——マクロ・RPA・AIエージェントの使い分け｜株式会社シクミ", "description": "ブラウザ操作の自動化は「マクロ・拡張機能」「RPA」「AIエージェント」の3つから選ぶ時代に。それぞれの得意・不得意の比較表、向いている業務、画面変更に強いAIエージェントの新しい選択肢、導入時の注意点を実務目線で解説します。", "datePublished": "2026-09-06", "dateModified": "2026-09-06", "author": {"@type": "Organization", "name": "株式会社シクミ", "url": "https://shikumi-co.jp/"}, "publisher": {"@type": "Organization", "name": "株式会社シクミ"}, "mainEntityOfPage": "https://shikumi-co.jp/column/browser-automation/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "株式会社シクミ", "item": "https://shikumi-co.jp/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://shikumi-co.jp/column/"}, {"@type": "ListItem", "position": 3, "name": "ブラウザ操作を自動化する3つの方法——マクロ・RPA・AIエージェントの使い分け｜株式会社シクミ", "item": "https://shikumi-co.jp/column/browser-automation/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "ブラウザ操作の自動化にはどんな方法がありますか？", "acceptedAnswer": {"@type": "Answer", "text": "大きく3つあります。①ブラウザ拡張・マクロ（単純な繰り返し向け）、②RPA（複数システムをまたぐ定型業務向け）、③AIエージェント（手順を自然言語で指示でき、画面変更に比較的強い新しい選択肢）です。業務の複雑さと変更頻度で選びます。"}}, {"@type": "Question", "name": "RPAとAIエージェントの違いは何ですか？", "acceptedAnswer": {"@type": "Answer", "text": "RPAは操作手順を1ステップずつ固定的に記録・実行するため、画面レイアウトの変更に弱い一方、動作は安定しています。AIエージェントは目的を自然言語で指示し、AIが画面を認識して操作するため柔軟ですが、確実性が求められる処理には人の確認ステップを挟む設計が必要です。"}}, {"@type": "Question", "name": "どんな業務が自動化に向いていますか？", "acceptedAnswer": {"@type": "Answer", "text": "ルールが明確で、繰り返し回数が多い業務です。例えば、管理画面からのデータダウンロード、複数サイトの情報収集、基幹システムへの定型入力など。逆に、判断が毎回異なる業務や、失敗が許されない送金・承認操作は自動化の対象から外すか、必ず人の確認を挟みます。"}}, {"@type": "Question", "name": "自動化してはいけないケースはありますか？", "acceptedAnswer": {"@type": "Answer", "text": "対象サイトの利用規約で自動アクセスが禁止されている場合は行ってはいけません。また、ログイン情報の扱い（平文保存の禁止）、失敗時に業務が止まらない設計、誤操作時の影響範囲の限定は、導入前に必ず設計すべき項目です。"}}]}]}</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/"><span class="mark">仕</span>SHIKUMI</a>
+  <nav><a href="/service/consulting/">AI導入支援</a><a href="/service/training/">AI研修</a><a href="/subsidy/">助成金</a><a href="/column/">コラム</a><a href="/area/tokyo/">対応エリア</a><a class="cta-s" href="mailto:info@shikumi-co.jp?subject=%E7%84%A1%E6%96%99%E7%B0%A1%E6%98%93%E8%A8%BA%E6%96%AD%E3%81%AE%E7%94%B3%E8%BE%BC">相談する</a></nav>
+</header>
+<main class="article">
+<nav class="crumbs" aria-label="パンくず"><a href="/">トップ</a> › <a href="/column/">コラム</a> › <span>ブラウザ操作を自動化する3つの方法——RPA・マクロ・AIエージェントの使い分け</span></nav>
+<div class="hero">
+  <p class="eyebrow">COLUMN</p>
+  <h1>ブラウザ操作を自動化する3つの方法<br class="sp">——RPA・マクロ・AIエージェントの使い分け</h1>
+  <p class="meta-line">更新日 2026-09-06 ／ 執筆: 株式会社シクミ（駐在型AIコンサルティング）</p>
+  <p class="lead">管理画面からのダウンロード、複数サイトからの情報収集、基幹システムへの入力——ブラウザの中の繰り返し作業は、いま3つの方法で自動化できます。従来のRPAとAIエージェントの違い、選び方、導入時の注意点を実務目線で解説します。</p>
+</div>
+
+<div class="conclusion">
+  <p class="c-label">CONCLUSION</p>
+  <p><b>結論:</b> ブラウザ操作の自動化は<b>①マクロ・拡張機能（単純繰り返し）②RPA（固定的な定型業務）③AIエージェント（変化に強い柔軟な自動化）</b>の3択です。2026年時点の実務では、まず対象業務の「手順の固定度」と「画面の変更頻度」を見て選ぶのが失敗しない順序。確実性が要る処理には、どの方式でも人の確認ステップを挟みます。</p>
+</div>
+
+<section>
+  <h2>3つの方法の比較</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th></th><th>① マクロ・拡張機能</th><th>② RPA</th><th>③ AIエージェント</th></tr></thead>
+    <tbody>
+      <tr><td><b>仕組み</b></td><td>操作の記録・再生</td><td>手順をフローとして構築</td><td>目的を自然言語で指示し、AIが画面を認識して操作</td></tr>
+      <tr><td><b>得意</b></td><td>同一ページでの単純な繰り返し</td><td>複数システムをまたぐ定型処理</td><td>レイアウト変更への追従・例外の多い作業</td></tr>
+      <tr><td><b>弱点</b></td><td>少し複雑になると破綻</td><td>画面変更のたびに改修が必要</td><td>動作の確実性は設計次第・実行コスト</td></tr>
+      <tr><td><b>費用感</b></td><td>無料〜数千円</td><td>月数万〜数十万円</td><td>AI利用料（従量）＋構築の一手間</td></tr>
+      <tr><td><b>作れる人</b></td><td>現場担当者</td><td>専任担当 or 外部</td><td>プロンプト設計ができる人</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>AIエージェントで何が変わったか</h2>
+  <p>従来のRPA最大の弱点は「画面が変わると壊れる」ことでした。ボタンの位置が変わっただけでエラーが出て、保守担当が直すまで業務が止まる——RPAが「野良ロボット」と揶揄された理由です。</p>
+  <p>AIエージェントは画面を人間のように認識して操作するため、<b>レイアウト変更に比較的強く、「この管理画面から先月分の明細をダウンロードして、いつものフォルダに保存して」という粒度の指示</b>で動かせます。一方で、毎回まったく同じ動作をする保証はないため、<b>金額や送信を伴う操作には人の確認を挟む設計</b>が実務の標準です。</p>
+  <p>使い分けの目安は次の通りです。</p>
+  <ul>
+    <li>手順が完全に固定・大量反復 → RPAか、可能ならシステム連携（API）</li>
+    <li>手順は決まっているが画面や例外が変わりやすい → AIエージェント</li>
+    <li>ダウンロード・情報収集など読み取り中心 → AIエージェントが最も手軽</li>
+  </ul>
+</section>
+
+<section>
+  <h2>導入前チェックリスト</h2>
+  <ol>
+    <li>対象サイト・システムの<b>利用規約</b>で自動アクセスが許容されているか</li>
+    <li><b>ログイン情報の管理</b>——平文でスクリプトに書かない・権限を絞ったアカウントを使う</li>
+    <li><b>失敗時の設計</b>——止まったら誰が気づくか・手作業に戻せるか</li>
+    <li><b>確認ステップ</b>——送信・登録・支払いを伴う操作は人の承認を挟む</li>
+    <li><b>効果測定</b>——削減時間を記録し、保守の手間と比較する</li>
+  </ol>
+</section>
+
+<section>
+  <h2>現場での実例</h2>
+  <p>当社の駐在型支援では、ブラウザ上の業務の半自動化は「業務を自動で動かす」型として構築しています。ポイントは、自動化の前に<b>不要な手順そのものを削る</b>こと。10ステップの業務をそのまま自動化するより、3ステップに再設計してから自動化する方が、速くて壊れにくい仕組みになります。詳しくは<a href="/service/consulting/">生成AI導入支援のページ</a>へ。</p>
+</section>
+
+<section>
+  <h2>よくある質問</h2>
+  <div class="faqs"><details><summary>ブラウザ操作の自動化にはどんな方法がありますか？</summary><p>大きく3つあります。①ブラウザ拡張・マクロ（単純な繰り返し向け）、②RPA（複数システムをまたぐ定型業務向け）、③AIエージェント（手順を自然言語で指示でき、画面変更に比較的強い新しい選択肢）です。業務の複雑さと変更頻度で選びます。</p></details><details><summary>RPAとAIエージェントの違いは何ですか？</summary><p>RPAは操作手順を1ステップずつ固定的に記録・実行するため、画面レイアウトの変更に弱い一方、動作は安定しています。AIエージェントは目的を自然言語で指示し、AIが画面を認識して操作するため柔軟ですが、確実性が求められる処理には人の確認ステップを挟む設計が必要です。</p></details><details><summary>どんな業務が自動化に向いていますか？</summary><p>ルールが明確で、繰り返し回数が多い業務です。例えば、管理画面からのデータダウンロード、複数サイトの情報収集、基幹システムへの定型入力など。逆に、判断が毎回異なる業務や、失敗が許されない送金・承認操作は自動化の対象から外すか、必ず人の確認を挟みます。</p></details><details><summary>自動化してはいけないケースはありますか？</summary><p>対象サイトの利用規約で自動アクセスが禁止されている場合は行ってはいけません。また、ログイン情報の扱い（平文保存の禁止）、失敗時に業務が止まらない設計、誤操作時の影響範囲の限定は、導入前に必ず設計すべき項目です。</p></details></div>
+</section>
+
+<section>
+  <p class="eyebrow">RELATED</p>
+  <h2>あわせて読む</h2>
+  <div class="rel-cards"><a class="card ward-card" href="/column/excel-tenki/"><h3>Excel転記を自動化する3つの方法</h3><p>ブラウザの次はExcel。転記作業をなくす選択肢。</p><span class="more">読む →</span></a><a class="card ward-card" href="/service/consulting/"><h3>生成AI導入支援（駐在型AIコンサル）</h3><p>自動化の前に業務を再設計。現場で実装するAI化支援。</p><span class="more">読む →</span></a></div>
+</section>
+
+<section class="cta-box">
+  <p class="eyebrow">CONTACT</p>
+  <h2>まずは、無料の簡易診断から</h2>
+  <p>オンライン・約2時間の無料簡易診断で、貴社のAI化の期待効果の目安をご提示します。診断だけのご利用も歓迎です。</p>
+  <a class="btn-main" href="mailto:info@shikumi-co.jp?subject=%E7%84%A1%E6%96%99%E7%B0%A1%E6%98%93%E8%A8%BA%E6%96%AD%E3%81%AE%E7%94%B3%E8%BE%BC%EF%BC%88%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E8%87%AA%E5%8B%95%E5%8C%96%E8%A8%98%E4%BA%8B%EF%BC%89">無料簡易診断を申し込む →</a>
+  <p class="cta-mail">メール: info@shikumi-co.jp（1営業日以内にご返信します）</p>
+</section>
+
+</main>
+<footer class="site-foot">
+  
+  <div class="f-links"><span>サービス:</span><a href="/service/consulting/">生成AI導入支援（駐在型AIコンサル）</a><a href="/service/training/">AI研修</a><a href="/subsidy/">助成金のご案内</a><a href="/column/">コラム</a></div>
+  <div class="f-co">
+    <p class="f-name">株式会社シクミ（shikumi inc.）</p>
+    <p>東京都渋谷区桜丘町18-4 二宮ビル1F ／ <a href="mailto:info@shikumi-co.jp">info@shikumi-co.jp</a></p>
+    <p>事業内容: AI導入支援（駐在型AIコンサルティング／AI研修）・ITコンサルティング・システム開発</p>
+    <p class="f-copy">© 2026 SHIKUMI INC. ／ <a href="/">トップへ戻る</a></p>
+  </div>
+</footer>
+</body>
+</html>
