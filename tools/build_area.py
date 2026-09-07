@@ -230,7 +230,7 @@ WARDS = {
 }
 
 # ---------------------------------------------------------------- 共通パーツ
-CSS_PATH = "/assets/site.css"
+CSS_PATH = "/assets/site.css?v=20260908b"
 
 # sitemap に含める固定ページ（エリア以外）。ページ追加時はここに足す
 EXTRA_URLS = [
@@ -589,6 +589,7 @@ def build_ward(slug, w):
   <div class="three">{points}</div>
 </section>
 {stats_section(w)}
+{section_common(w['name'])}
 <section>
   <p class="eyebrow">AREA</p>
   <h2>{w['name']}の主な対応エリア</h2>
@@ -596,7 +597,6 @@ def build_ward(slug, w):
   <ul class="area-list">{''.join(f'<li>{esc(a)}</li>' for a in w['areas'])}</ul>
   <p class="s-meta">記載のないエリア・近隣区もお気軽にご相談ください。</p>
 </section>
-{section_common(w['name'])}
 <section>
   <p class="eyebrow">FAQ</p>
   <h2>よくあるご質問</h2>
