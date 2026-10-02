@@ -1,34 +1,26 @@
 /**
- * シクミHP フォーム受付（お問い合わせ／資料ダウンロード）
+ * シクミHP フォーム受付（お問い合わせ／資料ダウンロード）— メール通知のみ版
  *
  * 使い方
- * 1. Googleスプレッドシートを新規作成（例：シクミ_HP問い合わせ）
- * 2. 拡張機能 → Apps Script を開き、このコードを貼り付けて保存
- * 3. デプロイ → 新しいデプロイ → 種類「ウェブアプリ」
+ * 1. https://script.google.com/ を開き「新しいプロジェクト」
+ * 2. このコードを貼り付けて保存（プロジェクト名は「シクミHPフォーム」など）
+ * 3. 右上「デプロイ」→「新しいデプロイ」→ 種類「ウェブアプリ」
  *    - 次のユーザーとして実行：自分
  *    - アクセスできるユーザー：全員
- * 4. 発行された「ウェブアプリのURL」を HP の assets/form.js の FORM_ENDPOINT に設定
- *
- * シートは種別ごとに自動で作られます（contact / download）。
+ *    → 初回は権限の承認画面が出るので許可する
+ * 4. 発行された「ウェブアプリのURL」（…/exec）を HP の assets/form.js の FORM_ENDPOINT に設定
  */
 var NOTIFY_TO = 'info@shikumi-co.jp, yukiya.ishii@shikumi-co.jp';
 var FROM_NAME = '株式会社シクミ HP';
 var DOC_URLS = {
-  tool: 'https://drive.google.com/XXXXXXXX' // メール一斉送信ツール 詳細資料のURLに差し替え
+  tool: 'https://drive.google.com/XXXXXXXX' // メール一斉送信ツール 詳細資料のリンク共有URLに差し替え
 };
 
 function doPost(e) {
   try {
     var p = e.parameter || {};
     var kind = p.kind === 'download' ? 'download' : 'contact';
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sh = ss.getSheetByName(kind) || createSheet_(ss, kind);
-    var now = new Date();
-    var row = kind === 'download'
-      ? [now, p.company || '', p.name || '', p.email || '', p.industry || '', p.doc || '', p.note || '', p.page || '']
-      : [now, p.company || '', p.name || '', p.email || '', p.tel || '', p.type || '', p.body || '', p.page || ''];
-    sh.appendRow(row);
-    notify_(kind, p, now);
+    notify_(kind, p, new Date());
     if (kind === 'download' && p.email) sendDoc_(p);
     return out_({ ok: true });
   } catch (err) {
@@ -38,16 +30,6 @@ function doPost(e) {
 
 function doGet() { return out_({ ok: true, ping: 'shikumi-form' }); }
 
-function createSheet_(ss, kind) {
-  var sh = ss.insertSheet(kind);
-  var header = kind === 'download'
-    ? ['受信日時', '会社名', 'お名前', 'メール', '業種', '希望資料', 'ひとこと', '送信元ページ']
-    : ['受信日時', '会社名', 'お名前', 'メール', '電話', '相談の種類', '相談内容', '送信元ページ'];
-  sh.appendRow(header);
-  sh.setFrozenRows(1);
-  return sh;
-}
-
 function notify_(kind, p, now) {
   var label = kind === 'download' ? '資料ダウンロード' : 'お問い合わせ';
   var subject = '【HP】' + label + '：' + (p.company || '会社名なし') + ' ' + (p.name || '');
@@ -55,7 +37,7 @@ function notify_(kind, p, now) {
     '受信日時：' + Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy-MM-dd HH:mm'),
     '会社名：' + (p.company || ''),
     'お名前：' + (p.name || ''),
-    'メール：' + (p.email || ''),
+    'メール：' + (p.email || '')
   ];
   if (kind === 'download') {
     lines.push('業種：' + (p.industry || ''), '希望資料：' + (p.doc || ''), 'ひとこと：' + (p.note || ''));
@@ -67,7 +49,6 @@ function notify_(kind, p, now) {
 }
 
 function sendDoc_(p) {
-  var url = DOC_URLS.tool;
   var body = [
     (p.name || '') + ' 様',
     '',
@@ -75,7 +56,7 @@ function sendDoc_(p) {
     '以下のリンクから資料をご覧いただけます。',
     '',
     '■ メール一斉送信ツール 詳細資料',
-    url,
+    DOC_URLS.tool,
     '',
     '資料を見て気になった点は、このメールに返信いただければ石井が直接お答えします。',
     '',
