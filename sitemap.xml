@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://shikumi-co.jp/</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://shikumi-co.jp/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://shikumi-co.jp/industry/</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://shikumi-co.jp/industry/real-estate/</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://shikumi-co.jp/industry/manufacturing/</loc><lastmod>2026-09-08</lastmod></url>
@@ -33,4 +33,10 @@
   <url><loc>https://shikumi-co.jp/area/tokyo/taito/</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://shikumi-co.jp/area/tokyo/sumida/</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://shikumi-co.jp/area/tokyo/koto/</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://shikumi-co.jp/service/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://shikumi-co.jp/tools/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://shikumi-co.jp/download/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://shikumi-co.jp/company/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://shikumi-co.jp/contact/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://shikumi-co.jp/news/</loc><lastmod>2026-10-02</lastmod></url>
 </urlset>
